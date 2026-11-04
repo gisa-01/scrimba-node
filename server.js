@@ -3,7 +3,11 @@ import http, { createServer } from 'node:http'
 const PORT = 8000
 
 const server = createServer((req, res) => {
-  res.end('Hello from the server')
+
+  if (req.url === '/api' && req.method === 'GET'){
+    res.end('Hello from the server')
+  }
+  
 })
 
 server.listen(PORT, () => console.log(`Server is running on port: ${PORT}`))
