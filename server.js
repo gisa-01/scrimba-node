@@ -1,24 +1,9 @@
-import http, { createServer } from "node:http";
-import { getDataFromDB } from "./database/db.js";
+const http = require('http')
 
-const PORT = 8000;
+const server = http.createServer((req, res) => {
+  console.log('request made');
+})
 
-const server = createServer(async (req, res) => {
-  const destinations = await getDataFromDB();
-  if (req.url === "/api" && req.method === "GET") {
-    res.setHeader("Content-Type", "application/json");
-    res.statusCode = 200;
-    res.end(JSON.stringify(destinations));
-  } else {
-    res.setHeader("Content-Type", "application/json");
-    res.statusCode = 404;
-    res.end(
-      JSON.stringify({
-        error: "not found",
-        message: "The requested route does not exist",
-      }),
-    );
-  }
-});
-
-server.listen(PORT, () => console.log(`Server is running on port: ${PORT}`));
+server.listen(3000, 'localhost', () =>{
+  console.log('Listening for request on port 3000')
+})
