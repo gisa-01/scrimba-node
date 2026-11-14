@@ -1,5 +1,6 @@
 const express = require("express");
 
+
 // express app
 
 const app = express();
@@ -11,6 +12,13 @@ app.set("view engine", "ejs");
 
 app.listen(3000); // It automatically adds localhost, you can also store it in a variable
 
+app.use((req, res, next) => {
+  console.log('New request made');
+  console.log('host', req.hostname);
+  console.log('path', req.path);
+  console.log('method', req.method);
+  next();
+})
 // respond to requests
 
 app.get("/", (req, res) => {
