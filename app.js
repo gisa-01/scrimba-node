@@ -1,5 +1,5 @@
 const express = require("express");
-
+const morgan = require('morgan')
 
 // express app
 
@@ -12,13 +12,10 @@ app.set("view engine", "ejs");
 
 app.listen(3000); // It automatically adds localhost, you can also store it in a variable
 
-app.use((req, res, next) => {
-  console.log('New request made');
-  console.log('host', req.hostname);
-  console.log('path', req.path);
-  console.log('method', req.method);
-  next();
-})
+// middleware & static files
+app.use(express.static('public'));
+
+app.use(morgan('dev'));
 // respond to requests
 
 app.get("/", (req, res) => {
